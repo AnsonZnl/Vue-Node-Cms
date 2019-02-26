@@ -1,18 +1,21 @@
 <template>
   <div id="app">
-    <h1></h1>
+    <nav>
+      <ul>
+        <li><router-link to="/jiance">监测</router-link></li>
+      </ul>
+    </nav>
     <router-view/>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'App'
+  name: 'App',
+  ip: '12'
 }
 </script>
 
 <style>
-#app {
 
-}
 </style>

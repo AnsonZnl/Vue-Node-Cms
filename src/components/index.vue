@@ -7,11 +7,15 @@
        <p>城市：{{ admin_area }}</p>
        <p>天气: {{ cond_txt_d }}</p>
     </div>
-  </div>
+    <div id="main" style="height:500px; width:500px;">
+
+    </div>
+ </div>
 </template>
 
 <script>
 import axios from 'axios'
+import echarts from 'echarts'
 export default {
   name: 'index',
   data () {
@@ -19,7 +23,8 @@ export default {
       title: '首页',
       admin_area: '',
       cond_txt_d: '',
-      date: ''
+      date: '',
+      rogOptions: {}
     }
   },created(){
       //读取常用商品列表
@@ -39,6 +44,24 @@ export default {
         // console.log(error);
         alert('获取天气数据失败！')
       })
+    },
+    mounted(){
+      var myChart = echarts.init(document.getElementById('main'));
+      myChart.setOption({
+          title: {
+              text: 'ECharts 入门示例'
+          },
+          tooltip: {},
+          xAxis: {
+              data: ['衬衫', '羊毛衫', '雪纺衫', '裤子', '高跟鞋', '袜子']
+          },
+          yAxis: {},
+          series: [{
+              name: '销量',
+              type: 'bar',
+              data: [5, 20, 36, 10, 10, 20]
+          }]
+      });
     }
 }
 </script>
