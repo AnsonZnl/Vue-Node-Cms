@@ -34,7 +34,7 @@ export default {
           location: '北京市'
         }
       }).then(response=>{
-        console.log(response.data.HeWeather6[0]);
+        // console.log(response.data.HeWeather6[0]);
         var res = response.data.HeWeather6[0];
         this.admin_area = res.basic.admin_area;
         this.cond_txt_d = res.daily_forecast[0].cond_txt_d;

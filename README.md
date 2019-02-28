@@ -33,3 +33,27 @@ module.exports = {
 ```
 - 在 webpack 中使用 ECharts：https://echarts.baidu.com/tutorial.html#%E5%9C%A8%20webpack%20%E4%B8%AD%E4%BD%BF%E7%94%A8%20ECharts
 -
+
+- Vue 中引入抽离自定义的公共方法
+1. src下创建`commonFunction/common.js`文件
+```
+export default{
+    login: function(){
+        console.log('11')
+    }
+}
+```
+2. `main.js`中引入并使用
+```
+// 引入公共js 注意路径
+import common from './commonFunction/common.js'
+Vue.prototype.common = common
+```
+3. 在`xx.vue`页面中使用
+```
+mounted(){
+  this.common.login();//'11'
+}
+```
+
+- 参考 - vue学习笔记五：在vue项目里面使用引入公共方法：https://blog.csdn.net/fiona_lms/article/details/80075227

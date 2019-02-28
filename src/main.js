@@ -7,9 +7,14 @@ import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import echarts from 'echarts'
 
+// 引入公共js 注意路径
+import common from './commonFunction/common.js'
+Vue.prototype.common = common
+
 Vue.prototype.$echarts = echarts
 Vue.config.productionTip = false
-Vue.use(ElementUI)
+Vue.use(ElementUI);
+// Vue.use(Common);
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
