@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import index from '@/components/index'
-import jiance from '@/components/jiance'
+import index from '@/components/pages/index'
+import jiance from '@/components/pages/jiance'
 
 Vue.use(Router)
 

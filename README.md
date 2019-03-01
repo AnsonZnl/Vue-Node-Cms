@@ -21,7 +21,7 @@ npm run build --report
 For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
 
 
-错误日志：
+## 错误日志：
 - 报错提示：`Module build failed: Error: No PostCSS Config found`- （找不到PostCss配置）
 - 解决方案：在项目根目录新建postcss.config.js文件，并对postcss进行配置：
 ```
@@ -34,7 +34,7 @@ module.exports = {
 - 在 webpack 中使用 ECharts：https://echarts.baidu.com/tutorial.html#%E5%9C%A8%20webpack%20%E4%B8%AD%E4%BD%BF%E7%94%A8%20ECharts
 -
 
-- Vue 中引入抽离自定义的公共方法
+## Vue 中引入抽离自定义的公共方法
 1. src下创建`commonFunction/common.js`文件
 ```
 export default{
@@ -57,3 +57,104 @@ mounted(){
 ```
 
 - 参考 - vue学习笔记五：在vue项目里面使用引入公共方法：https://blog.csdn.net/fiona_lms/article/details/80075227
+
+## 使用组件
+components下新建common文件夹，用来存放共用组件，`/src/components/common/nav.vue`
+ - 新建`nav.vue`组件，写入代码。
+ - 然后在`App.vue`中引入并注册。
+ 引入：
+ ``` 
+<template>
+  <div id="app">
+    <!-- 左侧导航 -->
+    <leftNav></leftNav>
+    <div class="main">
+        <router-view/>
+    </div>
+  </div>
+</template>
+<script>
+// 引入导航组件
+import leftNav from '@/components/common/nav.vue'
+export default {
+  name: 'App',
+  components: {
+    // 注册组件
+    leftNav
+  }
+}
+</script>
+<style></style>
+
+```
+- 参考：vue.js-组件基础: https://cn.vuejs.org/v2/guide/components.html
+
+## vue-组件嵌套之——父组件向子组件传值
+vue-组件嵌套之——父组件向子组件传值: https://www.cnblogs.com/padding1015/p/7878710.html
+
+1. 首先，值肯定是定义在父组件中的，供所有子组件共享。所以要在父组件的data中定义值：
+```
+export default {
+  name: 'App',
+  data() {
+    return {
+        ip: 'http://xj-api-v2.chingsoft.com:8088/v2/api/'
+    }
+  }
+}
+```
+2. 其次，父组件要和子组件有契合点：就是在父组件中调用、注册、引用子组件：
+
+- 引用：
+```
+import leftNav from '@/components/common/nav.vue'
+```
+- 注册：
+```
+export default {
+  name: 'App',
+  data() {
+    return {
+        ip: 'http://xj-api-v2.chingsoft.com:8088/v2/api/'
+    }
+  },
+  components: {
+    leftNav
+  }
+}
+```
+- 引用
+```
+<leftNav v-bind:ip="ip"></leftNav>
+```
+
+3. 最后，子组件内部肯定要去接受父组件传过来的值：props（小道具）来接收：
+```
+//与data平级
+    props:{
+        ip: String
+    },
+```
+
+4. 正常使用父级组件值
+```
+{{ ip }}
+```
+
+- vue组件之间如何互相获取$data数据？
+vue组件之间如何互相获取$data数据？： https://segmentfault.com/q/1010000008023002
+非父组件获取App.vue中的data值使用：`this.$parent.$data`
+`this.parent.data` 可以获取父级数据,也可以给父级数据赋值
+App.vue:
+```
+data() {
+   return {
+		name:''
+	}
+}
+```
+nav.vue:
+```
+this.$parent.$data.name = 1    //赋值
+console.log(this.$parent.$data.name)    //获取
+```

@@ -14,7 +14,7 @@ export default {
   name: 'index',
   data () {
     return {
-      ip:'http://xj-api-v2.chingsoft.com:8088/v2/api/',  
+      ip:'http://xj-api-v2.chingsoft.com:8088/v2/api/',
       title: '首页',
       admin_area: '',
       cond_txt_d: '',

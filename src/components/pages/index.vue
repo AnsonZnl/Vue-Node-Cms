@@ -1,14 +1,18 @@
 <template>
   <div class="head">
-    <h2>{{title}}</h2>
+    <h2>Home</h2>
+    <div><el-button @click="startHacking">Start</el-button></div>
     <div class="">
        <h3>天气</h3>
        <p>日期： {{ date }}</p>
        <p>城市：{{ admin_area }}</p>
        <p>天气: {{ cond_txt_d }}</p>
+       <p>{{ this.$parent.$data.ip }}</p>
     </div>
-    <div id="main" style="height:500px; width:500px;">
-
+    <div id="main">
+      <ul>
+        <li v-for="list in house" :key="list.id">{{ list.name }}</li>
+      </ul>
     </div>
  </div>
 </template>
@@ -20,10 +24,11 @@ export default {
   name: 'index',
   data () {
     return {
-      title: '首页',
+      // ip: 'http://xj-api-v2.chingsoft.com:8088/v2/api/',
       admin_area: '',
       cond_txt_d: '',
       date: '',
+      house: [],
       rogOptions: {}
     }
   },created(){
@@ -43,25 +48,33 @@ export default {
       }).catch(error=>{
         // console.log(error);
         alert('获取天气数据失败！')
+      });
+      // 展厅列表
+      axios.get(this.$parent.$data.ip + 'museum/dashboard/hall_house_get',{
+        params:{
+          token: 'token',
+          sessionId: '5'
+        }
+      }).then(response=>{
+        console.log(response.data);
+        console.log(response.data.result);
+        this.house = response.data.result;
+      }).catch(error=>{
+        console.log('获取展厅数据失败！')
       })
     },
+    methods:{
+      startHacking () {
+        this.$notify({
+          title: 'success',
+          type: 'success',
+          message: 'It works!',
+          duration: 5000
+        })
+      }
+    },
     mounted(){
-      var myChart = echarts.init(document.getElementById('main'));
-      myChart.setOption({
-          title: {
-              text: 'ECharts 入门示例'
-          },
-          tooltip: {},
-          xAxis: {
-              data: ['衬衫', '羊毛衫', '雪纺衫', '裤子', '高跟鞋', '袜子']
-          },
-          yAxis: {},
-          series: [{
-              name: '销量',
-              type: 'bar',
-              data: [5, 20, 36, 10, 10, 20]
-          }]
-      });
+       
     }
 }
 </script>
