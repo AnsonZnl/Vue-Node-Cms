@@ -31,26 +31,27 @@ export default {
 
         // myChart2.hideLoading();  
         // axios请求数据 
-      axios.get(this.ip + 'museum/network_topology/device_history_data',{
+      // axios.get(this.ip + 'museum/network_topology/device_history_data',{
+      axios.get('https://easy-mock.com/mock/5c7cd0f89dbc90184e94358d/museum/device_data',{
         params: {
-          token: 'token',
-          sessionId: 5,
-          id: 91,
-          endTime:'1551161940000',
-          startTime:'1551075540000',
-          monitorType:'TEMPERATURE',
-          max: '',
-          min: '',
+          // token: 'token',
+          // sessionId: 5,
+          // id: 91,
+          // endTime:'1551161940000',
+          // startTime:'1551075540000',
+          // monitorType:'TEMPERATURE',
+          // max: '',
+          // min: '',
         }
       }).then(response=>{
-        // console.log(response.data.result);
-        var res = response.data.result;
+        console.log(response.data);
+        var res = response.data.data;
         var len = res.length;
         var data1= [],
             timestamp1= [];
         for(var i=0; i<len; i++){
             data1.push(res[i].value);
-            timestamp1.push(res[i].timestamp);
+            timestamp1.push(+(res[i].date));
             // timestamp1.push(this.common.toDate(res[i].timestamp));
         }
         var timestamp2 = this.common.unique(timestamp1);

@@ -158,3 +158,4 @@ nav.vue:
 this.$parent.$data.name = 1    //赋值
 console.log(this.$parent.$data.name)    //获取
 ```
+

@@ -15,7 +15,7 @@
             <el-menu-item index="2-2">选项2</el-menu-item>
             <el-menu-item index="2-3">选项3</el-menu-item>
         </el-submenu>
-        <el-menu-item index="3">{{ip}}</el-menu-item>
+        <!-- <el-menu-item index="3">{{ip}}</el-menu-item> -->
         <el-menu-item index="4"><router-link to="/jiance">监测</router-link></el-menu-item>
         </el-menu>
     </div>

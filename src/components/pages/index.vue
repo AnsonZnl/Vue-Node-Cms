@@ -3,13 +3,14 @@
     <h2>Home</h2>
     <div><el-button @click="startHacking">Start</el-button></div>
     <div class="">
-       <h3>天气</h3>
+       <h2>天气</h2>
        <p>日期： {{ date }}</p>
        <p>城市：{{ admin_area }}</p>
        <p>天气: {{ cond_txt_d }}</p>
-       <p>{{ this.$parent.$data.ip }}</p>
+       <!-- <p>{{ this.$parent.$data.ip }}</p> -->
     </div>
     <div id="main">
+      <h2>展厅列表</h2>
       <ul>
         <li v-for="list in house" :key="list.id">{{ list.name }}</li>
       </ul>
@@ -50,15 +51,16 @@ export default {
         alert('获取天气数据失败！')
       });
       // 展厅列表
-      axios.get(this.$parent.$data.ip + 'museum/dashboard/hall_house_get',{
+      // axios.get(this.$parent.$data.ip + 'museum/dashboard/hall_house_get',{
+      axios.get('https://easy-mock.com/mock/5c7cd0f89dbc90184e94358d/museum/hall_house_get',{
         params:{
-          token: 'token',
-          sessionId: '5'
+          // token: 'token',
+          // sessionId: '5'
         }
       }).then(response=>{
         console.log(response.data);
-        console.log(response.data.result);
-        this.house = response.data.result;
+        // console.log(response.data.result);
+        this.house = response.data.data;
       }).catch(error=>{
         console.log('获取展厅数据失败！')
       })
