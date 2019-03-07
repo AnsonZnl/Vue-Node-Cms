@@ -29,5 +29,14 @@ export default{
     sort1: function(arr){
         //数组排序
         return arr.sort(function (a, b){ return a - b; });
-    }
+    },
+    startHacking (self, type, msg) {
+        //右侧提示框
+        self.$notify({
+          title: msg,
+          type: type,
+          message: '',
+          duration: 5000
+        })
+      },
 }

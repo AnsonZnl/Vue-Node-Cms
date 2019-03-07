@@ -159,3 +159,18 @@ this.$parent.$data.name = 1    //赋值
 console.log(this.$parent.$data.name)    //获取
 ```
 
+## Vue中的登录
+参考-Vue项目中实现用户登录及token验证：http://www.cnblogs.com/web-record/p/9876916.html
+脚本之家- vue保存登录状态：https://www.jb51.net/article/140367.htm
+ - https://www.cnblogs.com/hcxy/p/7993724.html
+- https://www.cnblogs.com/zdd2017/p/9871925.html
+ - sf: https://segmentfault.com/a/1190000016040068
+ - 云溪社区 详细的vue登录操作：https://cloud.tencent.com/developer/article/1199255
+ - (vue.js)前后端分离的单页应用如何来判断当前用户的登录状态？:http://www.codes51.com/itwd/4114969.html
+ - sf-vue页面控制权限,vuex刷新保存状态、登录状态保存:https://segmentfault.com/a/1190000016047911
+ - sf-Vue实战(四)登录/注册页的实现: https://segmentfault.com/a/1190000015637039
+ - vue+axios新手实践实现登陆:https://segmentfault.com/a/1190000015201803
+ - sf-Vue-router实现单页面应用在没有登录情况下，自动跳转到登录页面:https://segmentfault.com/a/1190000009086403
+-  sf:从前后端分别学习——注册/登录流程2:https://segmentfault.com/a/1190000016084468
+
+参考：https://cloud.tencent.com/developer/article/1199255

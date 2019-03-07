@@ -10,7 +10,7 @@
        <!-- <p>{{ this.$parent.$data.ip }}</p> -->
     </div>
     <div id="main">
-      <h2>展厅列表</h2>
+      <h2>星座列表</h2>
       <ul>
         <li v-for="list in house" :key="list.id">{{ list.name }}</li>
       </ul>
@@ -58,11 +58,11 @@ export default {
           // sessionId: '5'
         }
       }).then(response=>{
-        console.log(response.data);
+        // console.log(response.data);
         // console.log(response.data.result);
         this.house = response.data.data;
       }).catch(error=>{
-        console.log('获取展厅数据失败！')
+        console.log('获取星座数据失败！')
       })
     },
     methods:{

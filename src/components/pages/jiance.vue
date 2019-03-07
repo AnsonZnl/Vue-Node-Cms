@@ -61,8 +61,6 @@ export default {
         for(var j=0; j<len2; j++){
           timestamp4.push(this.common.toDate(timestamp3[j]));
         }
-
-
          myChart2.setOption({
           title: {
               text: '堆叠区域图'
@@ -131,7 +129,7 @@ export default {
       })
       }
     },mounted(){
-      this.common.log1('er');
+      // this.common.log1('er');
       this.loadChart();
     }
 }
