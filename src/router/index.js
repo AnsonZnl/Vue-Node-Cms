@@ -1,14 +1,16 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import index from '@/components/pages/index'
-import jiance from '@/components/pages/jiance'
-import login from '@/components/pages/login'
+import login from '@/views/login'
+import index from '@/views/index'
+import jiance from '@/views/common/jiance'
+import home from '@/views/common/home'
+
 Vue.use(Router)
 
 const router = new Router({
   routes: [
     {
-      path: '/',
+      path: '/login',
       name: 'login',
       component: login,
       meta:{
@@ -19,17 +21,10 @@ const router = new Router({
       path: '/index',
       name: 'index',
       component: index,
-      meta:{
-        needLogin: true
-      }
-    },
-    {
-      path: '/jiance',
-      name: 'jiance',
-      component: jiance,
-      meta:{
-        needLogin: true
-      }
+      children:[
+        { path: '/home', name: 'home', component: home, meta:{ needLogin: true } },
+        { path: '/jiance', name: 'jiance', component: jiance, meta:{ needLogin: true } }
+      ]
     }
   ]
 })

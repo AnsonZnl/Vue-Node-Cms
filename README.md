@@ -193,3 +193,7 @@ npm install sass-loader --save-dev
     }
 </style>
 ```
+
+## 配置子路由
+
+参考：https://www.imooc.com/video/18569

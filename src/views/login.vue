@@ -31,7 +31,6 @@ import axios from 'axios'
     },
     methods:{
     startHacking (msg) {
-      console.log(this)
         this.$notify({
           title: msg,
           type: 'success',
@@ -52,8 +51,6 @@ import axios from 'axios'
               userNameArr= [],
               passWordArr= [],
               ses= window.sessionStorage;
-          // console.log(response.data.data);
-          // console.log(this.userName, this.passWord);
           // 拿到所有的username
           for(var i=0; i<len; i++){
             userNameArr.push(res[i].username);
@@ -67,12 +64,11 @@ import axios from 'axios'
             if(passWordArr[index] === this.passWord){
               // 把token放在sessionStorage中
               ses.setItem('data', res[index].token);
-              this.$parent.$data.userTitle = res[index].usertitle;
+              ses.setItem('userName', res[index].usertitle);
               //验证成功进入首页
               this.startHacking ('登录成功！');
               //跳转到首页
-              this.$router.push('/index');
-              // console.log(this.$router);
+              this.$router.push('/home');
             }else{
               alert('密码错误！')
             }
@@ -80,10 +76,6 @@ import axios from 'axios'
         }).catch(err=>{
           console.log('连接数据库失败！')
         })
-      },
-      Jump(){
-        this.$router.push('/index');
-        console.log('123')
       }
     }
   }

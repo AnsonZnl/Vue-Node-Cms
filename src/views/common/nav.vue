@@ -8,10 +8,10 @@
         background-color="#409EFF"
         text-color="#fff"
         active-text-color="#fff">
-        <el-menu-item index="1"><router-link to="/index">首页</router-link></el-menu-item>
+        <el-menu-item index="1"><router-link to="/home">首页</router-link></el-menu-item>
         <el-menu-item index="2"><router-link to="/jiance">图表</router-link></el-menu-item>
         <el-submenu index="3">
-            <template slot="title">{{ this.$parent.$data.userTitle }}</template>
+            <template slot="title">{{ user }}</template>
             <el-menu-item index="4" @click="loginOut()">注销</el-menu-item>
         </el-submenu>
         </el-menu>
@@ -23,7 +23,7 @@ export default {
       return {
         activeIndex: '1',
         activeIndex2: '1',
-        user: '未登录'
+        user: window.sessionStorage.userName
       };
     },
     props:{
@@ -36,9 +36,9 @@ export default {
       loginOut(){
         // 注销后 清楚session信息 ，并返回登录页
         window.sessionStorage.removeItem('data');
+        window.sessionStorage.removeItem('userName');
         this.common.startHacking(this, 'success', '注销成功！');
-        this.$router.push('/');
-        this.$parent.$data.userTitle = ''
+        this.$router.push('/login');
       }
     }
   }

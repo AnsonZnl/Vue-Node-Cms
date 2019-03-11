@@ -1,44 +1,30 @@
 <template>
-  <div id="app">
-    <!-- 左侧导航 -->
-    <leftNav v-bind:ip="ip" v-if="userTitle"></leftNav>
-    <div class="main">
-        <!-- <index v-bind:ip="ip"></index> -->
+  <div id="app"> 
         <router-view/>
-    </div>
   </div>
 </template>
 
 <script>
-// 引入导航组件
-import index from '@/components/pages/index.vue'
-import leftNav from '@/components/common/nav.vue'
-
+import Index from './views/index'
+import login from './views/login'
+import leftNav from './views/common/nav.vue'
 export default {
   name: 'App',
+  components: {
+    Index,
+    login,
+    leftNav
+  },
   data() {
     return {
-        ip: 'http://xj-api-v2.chingsoft.com:8088/v2/api/',
-        userTitle: ''
     }
-  },
-  components: {
-    // 注册组件
-    index,
-    leftNav
   }
 }
 </script>
 
 <style>
-*{
+body{
   padding: 0;
   margin: 0;
-}
-a{
-  text-decoration: none;
-}
-.main{
-  padding: 10px;
 }
 </style>

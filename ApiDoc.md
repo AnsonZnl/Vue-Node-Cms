@@ -11,4 +11,3 @@ Mock语法：http://mockjs.com/
 
 ### 设备数据
 - url: https://easy-mock.com/mock/5c7cd0f89dbc90184e94358d/museum/device_data
-
