@@ -1,9 +1,9 @@
 <template>
 <div> 
   <leftNav/>
-  <div class="main">
+  <el-col :span="20" class="main">
     <router-view/>
-  </div>
+  </el-col>
 </div>
 </template>
 
@@ -74,5 +74,8 @@ a{
 }
 .main{
   padding: 10px;
+  position:fixed;
+  top: 61px;
+  right: 0;
 }
 </style>

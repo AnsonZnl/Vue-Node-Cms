@@ -197,3 +197,31 @@ npm install sass-loader --save-dev
 ## 配置子路由
 
 参考：https://www.imooc.com/video/18569
+
+
+## ElementUI bug
+
+```javascript
+ <el-menu
+        :default-active="$route.path"
+        class="el-menu-demo"
+        mode="horizontal"
+        @select="handleSelect"
+        background-color="#fff"
+        text-color="#409EFF"
+        router
+        active-text-color="#409EFF">
+    <el-menu-item index="/home">首页</el-menu-item>
+    <el-menu-item index="/jiance">图表</el-menu-item>
+    <el-submenu index="">
+        <template slot="title">{{ ses.userName }}</template>
+        <el-menu-item @click="loginOut()">注销</el-menu-item>
+    </el-submenu>
+</el-menu>
+```
+active跟随路径切换
+`:default-active="$route.path"`
+使用router模式
+`router`
+index是router-link的替代
+`index='/hemo'`

@@ -30,13 +30,9 @@ export default{
         //数组排序
         return arr.sort(function (a, b){ return a - b; });
     },
-    startHacking (self, type, msg) {
-        //右侧提示框
-        self.$notify({
-          title: msg,
-          type: type,
-          message: '',
-          duration: 5000
-        })
-      },
+    message: function(self, type, text) {
+        self.$message({howClose: true, message: text, type: type})
+        //success-成功 | warning-警告 | error-错误  | ‘’-普通
+        //使用：this.common.message(this, type, msg);
+      }
 }
