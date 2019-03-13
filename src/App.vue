@@ -1,6 +1,6 @@
 <template>
   <div id="app"> 
-        <router-view/>
+        <router-view></router-view>
   </div>
 </template>
 
@@ -22,8 +22,8 @@ a{
   display:block;
   clear:both;
   content:"";
-  visibility:
-  hidden;height:0
+  visibility:hidden;
+  height:0;
 }
 .float-left{
     float: left;

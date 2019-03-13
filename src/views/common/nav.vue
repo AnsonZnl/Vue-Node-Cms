@@ -100,14 +100,16 @@ export default {
     }
   }
 </script>
-<style scope lang='scss'>
+<style scoped lang='scss'>
 .el-menu--horizontal>.el-submenu {
     float: right;
 }
 .el-menu-vertical-demo{
     height:100vh;
 }
-
+.float-right{
+    float: right;
+}
 #nav-title{
   line-height:61px;
   padding: 10px;

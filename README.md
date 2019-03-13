@@ -219,9 +219,103 @@ npm install sass-loader --save-dev
     </el-submenu>
 </el-menu>
 ```
-active跟随路径切换
-`:default-active="$route.path"`
-使用router模式
-`router`
-index是router-link的替代
+active跟随路径切换    
+`:default-active="$route.path"`    
+使用router模式    
+`router`    
+index是router-link的替代        
 `index='/hemo'`
+
+## 打包上线
+把绝对路径改成相对路径 
+```
+config/index.js/注意是build{...}assetsPublicPath: '/' ---> 改为----> assetsPublicPath: './' 
+```
+就在前面加一个点改为决对路径。 
+然后执行 打包命令`npm run build` 打包成功后会有一个dist文件就可用了。
+然后打开`dist`文件使用node`http-server`就可以访问了，
+
+## 打包上线后的css样式混乱
+项目开发完成后，执行`npm run build` 进行打包，将打包完成的dist文件部署在服务器。配置好域名解析，就可以实现工程上线。
+上线后，我们有时候会发现，它怎么和本地调试时长得不一样？
+长得不一样是样式问题，是打包的时候顺序先后问题，有一些样式没有生效，有一些样式被覆盖了。这时候可以考虑以下几种方法。
+1. main.js样式引入顺序问题
+有时候我们发现组件内的样式没有生效，可能是被第三方组件样式覆盖了，在`mian.js`中把`router`放在最后引入，就可以实现组件样式在第三方样式之后渲染。
+```Javascript
+import Vue from 'vue'
+import App from './App'
+import ElementUI from 'element-ui'
+import 'element-ui/lib/theme-chalk/index.css'
+import echarts from 'echarts'
+import router from './router'//router放在最后引用
+```
+2. 使用范围样式`<style scoped>`
+`<style scoped>`是H5的新特性，它限制样式只适用于当前组件，避免组件间的样式干扰。
+
+3. 还有一些是第三方组件的默认样式，在本地调试时没有显现出来，想要最直接地得到效果，就是在控制台里找到对应的类，再手动在组件里修改成自己想要的值。这种方式比较简单粗暴，只适合临时解决问题，不建议经常使用此种方法。
+
+Vue工程打包上线样式错乱问题：https://blog.csdn.net/feiyu_may/article/details/81100255
+
+
+## 组件切换过度效果-transition
+我之前的Vue笔记：https://github.com/AnsonZnl/vueCli
+Vue.js-transition过渡动画教程：https://cn.vuejs.org/v2/guide/transitions.html
+
+## Vue中使用axios请求node接口时如何跨域请求
+- 今天被跨域请求的问题困扰了很久，跨域一句话的理解就是：**服务端和请求端的地址不一样。**
+Vue项目使用axios请求Node接口跨域时，当使用CORS在服务器端解决跨域时。一定要把设置Header头部信息放在最上面    
+Node服务端的server.js中：
+```js
+//server.js
+const express = require('express');
+const app = express();
+
+//以下 配置允许跨域请求； **********一定要放在上面**********
+app.all('*', function (req, res, next) {
+    res.header('Access-Control-Allow-Origin', '*')
+    res.header('Access-Control-Allow-Headers', 'Content-Type,Content-Length, Authorization, Accept,X-Requested-With')
+    res.header('Access-Control-Allow-Methods', 'PUT,POST,GET,DELETE,OPTIONS')
+    res.header('X-Powered-By', ' 3.2.1')
+    if(req.method=="OPTIONS") res.send(200);/*让options请求快速返回*/
+    else  next();
+})
+
+app.get('/data', (req, res)=>{
+    res.send('我是data-响应成功!');
+}).listen(8080, "127.0.0.1");
+console.log('Server is running at http://127.0.0.1:8080/');
+
+```
+Vue客户端list.vue中：
+```js
+send(){
+    axios.get('http://127.0.0.1:8080/data',{}).then(
+        res=>{
+            console.log(res);
+            this.data = res.data;
+        }
+    ).catch(
+        err=>{
+            console.log(err)
+        }
+    )
+}
+```
+**参考资料：**    
+- 知乎-关于跨域，你想知道的全在这里 ：https://zhuanlan.zhihu.com/p/25778815
+- node与vue结合的前后端分离跨域问题: https://www.cnblogs.com/bfwbfw/p/7893691.html
+- 阮一峰-跨域资源共享 CORS 详解：http://www.ruanyifeng.com/blog/2016/04/cors.html
+
+
+## 使用http-proxy代理
+
+
+
+nodejs之http-proxy几点常见问题：https://blog.csdn.net/xiaokhaha/article/details/81674510
+Http 请求头中的 Proxy-Connection：https://imququ.com/post/the-proxy-connection-header-in-http-request.html
+http-proxy代理nodejs服务器转发跨域资源：http://www.mizuiren.com/490.html
+Node.js配合node-http-proxy解决本地开发ajax跨域问题：https://www.cnblogs.com/woodk/p/5817755.html
+七天学会NodeJS：https://www.jqhtml.com/7264.html
+
+## 打包上线
+打包之后只需要放在Nginx里运行就行了---先记下 我也没试过

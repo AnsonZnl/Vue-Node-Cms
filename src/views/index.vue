@@ -2,7 +2,7 @@
 <div> 
   <leftNav/>
   <el-col :span="20" class="main">
-    <router-view/>
+      <router-view/>
   </el-col>
 </div>
 </template>

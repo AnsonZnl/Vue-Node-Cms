@@ -2,10 +2,13 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
 import App from './App'
-import router from './router'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import echarts from 'echarts'
+import router from './router'
+import axios from 'axios';
+Vue.prototype.$axios=axios;
+// 那么在其他vue组件中就可以this.$axios调用使用
 
 // 引入公共js 注意路径
 import common from './commonFunction/common.js'
