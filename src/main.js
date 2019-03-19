@@ -9,7 +9,7 @@ import router from './router'
 import axios from 'axios';
 Vue.prototype.$axios=axios;
 // 那么在其他vue组件中就可以this.$axios调用使用
-
+import './assets/style.css'
 // 引入公共js 注意路径
 import common from './commonFunction/common.js'
 Vue.prototype.common = common
