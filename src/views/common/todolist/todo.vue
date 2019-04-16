@@ -1,24 +1,24 @@
 <template>
 <div>
   <section class="todoList">
-    <input 
-      type="text"
-      class="add-input"
-      autofocus='autofocus'
-      placeholder="接下来做什么？"
-      @keyup.enter="addTodo"
-    >
-    <Item 
-      :todo="todo"
-      v-for="todo in filteredTodos"
-      :key='todo.id'
-      @del='deleteTodo'
+    <Tabs
+        :filter="filter"
+        :todos ='todos'
+        @toggle='toggleFilter'
+        @clearAllCompleted='clearAllCompleted'
     />
-    <Tabs 
-    :filter="filter"
-    :todos ='todos'
-    @toggle='toggleFilter'
-    @clearAllCompleted='clearAllCompleted'
+    <input
+        type="text"
+        class="add-input"
+        autofocus='autofocus'
+        placeholder="接下来做什么？"
+        @keyup.enter="addTodo"
+    >
+    <Item
+        :todo="todo"
+        v-for="todo in filteredTodos"
+        :key='todo.id'
+        @del='deleteTodo'
     />
   </section>
   </div>
@@ -41,12 +41,17 @@ export default {
     methods: {
       addTodo(e){
         // unshift() 想数组头部添加元素 返回长度
-        this.todos.unshift({
-          id: id++,
-          content: e.target.value.trim(),
-          completed: false
-        })
+        if(e.target.value.trim()){
+            this.todos.unshift({
+              id: id++,
+              content: e.target.value.trim(),
+              completed: false
+          })
+        }else{
+          alert('不能为空！');
+        }
         e.target.value = ''
+        console.log(this.todos)
       },
       deleteTodo(id){
            //splice() 方法向/从数组中添加/删除项目,然后返回被删除的项目。 注释:该方法会改变原始数组。

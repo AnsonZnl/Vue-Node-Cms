@@ -319,3 +319,8 @@ Node.js配合node-http-proxy解决本地开发ajax跨域问题：https://www.cnb
 
 ## 打包上线
 打包之后只需要放在Nginx里运行就行了---先记下 我也没试过
+
+## Vue中添加MarkDown须发解析
+
+参考：https://marked.js.org/#/README.md#demo
+参考：https://blog.csdn.net/sdta25196/article/details/80325181

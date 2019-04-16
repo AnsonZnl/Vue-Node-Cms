@@ -1,7 +1,7 @@
 <template>
    <div class="top clearfloat">
    <el-row class="tac">
-      <el-col :span="20" class="float-right">
+      <el-col :span="20" class="float-right topNavMinWidth">
         <el-menu
         :default-active="$route.path"
         class="el-menu-demo"
@@ -21,7 +21,7 @@
         </el-submenu>
         </el-menu>
         </el-col>
-        <el-col :span="4">
+        <el-col :span="4" class="leftNavMinWidth">
         <!--
         <el-radio-group v-model="isCollapse">
           <el-radio-button :label="false">展开</el-radio-button>
@@ -119,6 +119,12 @@ export default {
   :hover{
     background-color: #fff;
   }
+}
+.leftNavMinWidth{
+  min-width: 200px;
+}
+.topNavMinWidth{
+  min-width: 200px;
 }
 </style>
 <style lang="">
