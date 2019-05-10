@@ -1,6 +1,7 @@
-# bowuguanxitong
+#  使用Vue+Node打造的Cms系统 
+Dome： http://www.jsnav.top
 
-> A Vue.js project
+> 使用Vue+Node打造的轻量级CMS系统
 
 ## Build Setup
 
