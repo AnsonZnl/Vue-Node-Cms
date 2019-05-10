@@ -1,8 +1,11 @@
-#  使用Vue+Node打造的Cms系统 
+#  轻量级Vue-Node-Cms系统 
 Dome： http://www.jsnav.top
 
 > 使用Vue+Node打造的轻量级CMS系统
 
+灵感来自于： 
+- [vue-admin-template](https://github.com/PanJiaChen/vue-admin-template)
+- [nswbmw/N-blog](https://github.com/nswbmw)
 ## Build Setup
 
 ``` bash
