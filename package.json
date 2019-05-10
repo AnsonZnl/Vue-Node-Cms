@@ -7,14 +7,19 @@
   "scripts": {
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
     "start": "npm run dev",
-    "build": "node build/build.js"
+    "build": "node build/build.js",
+    "pm2start": "cross-env NODE_ENV=production pm2 start index.js --name 'bowuguanxitong'"
   },
   "dependencies": {
     "axios": "^0.18.0",
+    "body-parser": "^1.19.0",
     "echarts": "^4.1.0",
     "element-ui": "^2.5.4",
     "express": "^4.16.4",
+    "express-formidable": "^1.2.0",
     "marked": "^0.6.2",
+    "mongoose": "^5.5.6",
+    "qs": "^6.7.0",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1",
     "vuex": "^3.1.0"

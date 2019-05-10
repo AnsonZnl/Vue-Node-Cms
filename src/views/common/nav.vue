@@ -1,7 +1,7 @@
 <template>
    <div class="top clearfloat">
    <el-row class="tac">
-      <el-col :span="20" class="float-right topNavMinWidth">
+      <!-- <el-col :span="20" class="float-right topNavMinWidth">
         <el-menu
         :default-active="$route.path"
         class="el-menu-demo"
@@ -20,8 +20,8 @@
             <el-menu-item class="logout" @click="loginOut()">退出登录</el-menu-item>
         </el-submenu>
         </el-menu>
-        </el-col>
-        <el-col :span="4" class="leftNavMinWidth">
+        </el-col> -->
+        <el-col class="leftNavMinWidth">
         <!--
         <el-radio-group v-model="isCollapse">
           <el-radio-button :label="false">展开</el-radio-button>
@@ -41,38 +41,40 @@
             >
             <el-menu-item index="/home">
               <i class="el-icon-menu"></i>
-              <span slot="title">首页</span>
+              <span class="hidden-sm-and-down" slot="title">首页</span>
             </el-menu-item>
             <el-submenu index="1">
               <template slot="title">
                 <i class="el-icon-document"></i>
-                <span>文档</span>
+                <span class="hidden-sm-and-down">文档</span>
               </template>
               <el-menu-item-group>
-                <el-menu-item index="/docList">文章列表</el-menu-item>
-                <el-menu-item index="/addDoc">添加文章</el-menu-item>
+                <el-menu-item class="hidden-sm-and-down" index="/docList">文章列表</el-menu-item>
+                <el-menu-item class="hidden-sm-and-down" index="/addDoc">添加文章</el-menu-item>
               </el-menu-item-group>
             </el-submenu>
             <el-submenu index="2">
               <template slot="title">
                 <i class="el-icon-view"></i>
-                <span>图表</span>
+                <span class="hidden-sm-and-down">图表</span>
               </template>
               <el-menu-item-group>
-                <el-menu-item index="/lineChart">折线图</el-menu-item>
-                <el-menu-item index="/mixChart">混合图</el-menu-item>
+                <el-menu-item class="hidden-sm-and-down" index="/lineChart">折线图</el-menu-item>
+                <el-menu-item class="hidden-sm-and-down" index="/mixChart">混合图</el-menu-item>
               </el-menu-item-group>
             </el-submenu>
             <el-menu-item index="/option">
               <i class="el-icon-setting"></i>
-              <span slot="title">功能</span>
+              <span class="hidden-sm-and-down" slot="title">功能</span>
             </el-menu-item>
           </el-menu>
         </el-col>
       </el-row>
     </div> 
 </template>
+
 <script>
+import 'element-ui/lib/theme-chalk/display.css';
 export default {
     data() {
       return {
@@ -121,10 +123,10 @@ export default {
   }
 }
 .leftNavMinWidth{
-  min-width: 200px;
+  // min-width: 200px;
 }
 .topNavMinWidth{
-  min-width: 200px;
+  // min-width: 200px;
 }
 </style>
 <style lang="">

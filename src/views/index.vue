@@ -1,9 +1,13 @@
 <template>
 <div> 
-  <leftNav/>
-  <el-col :span="20" class="main">
-      <router-view/>
-  </el-col>
+  <el-row>
+    <el-col :xs='4' :sm='4' :md='4' :xl='4'>
+         <leftNav/>
+    </el-col>
+    <el-col :xs="20" :sm='20' :md='20' :xl='20' class="main">
+        <router-view/>
+    </el-col>
+  </el-row>
 </div>
 </template>
 
@@ -29,7 +33,7 @@ export default {
       //读取常用商品列表
       axios.get('https://free-api.heweather.net/s6/weather',{
         params: {
-          key: 'HE1812191016481373',
+          key: 'f586999e15564d0d96d560485b5f4de8',
           location: '北京市'
         }
       }).then(response=>{

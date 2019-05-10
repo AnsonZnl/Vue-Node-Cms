@@ -4,15 +4,22 @@ import Vue from 'vue'
 import App from './App'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
+import 'element-ui/lib/theme-chalk/display.css'
 import echarts from 'echarts'
 import router from './router'
-import axios from 'axios';
-Vue.prototype.$axios=axios;
+import axios from 'axios'
+import qs from 'qs'
+Vue.prototype.$qs = qs
+axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
+Vue.prototype.$axios = axios;
 // 那么在其他vue组件中就可以this.$axios调用使用
 import './assets/style.css'
 // 引入公共js 注意路径
 import common from './commonFunction/common.js'
 Vue.prototype.common = common
+
+import global_ from './views/GlobalConfig'//引用文件
+Vue.prototype.GLOBAL = global_//挂载到Vue实例上面
 
 Vue.prototype.$echarts = echarts
 Vue.config.productionTip = false

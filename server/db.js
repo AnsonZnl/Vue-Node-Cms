@@ -8,7 +8,7 @@ var db= mongoose.connection;
 //连接
 db.on('error', console.error.bind(console, 'connection error'));
 db.once('open', function(){
-    console.log('connect ok')
+    console.log('ok')
     // 建立schema （表 / 集合） 定义表的字段规则
     var kittySchema = mongoose.Schema({
         name: String,
@@ -19,7 +19,7 @@ db.once('open', function(){
     var Kitten = mongoose.model('Kitten', kittySchema)
     Kitten.find({name: '张宁乐'}, (err, data)=>{
         if(!err){
-            console.log('send ok')
+            console.log(data)
             globalData =data
         }else{
             throw err;
@@ -36,9 +36,15 @@ app.all('*', function(req, res, next) {
        res.header("Content-Type", "application/json;charset=utf-8");
        next();
 })
+
 // api 接口
 app.get('/data', (req, res)=>{
     res.send(globalData);
+}).listen(8081, "127.0.0.1");
+// testInput 表单提交接口
+app.post('/testInput', (req, res)=>{
+    res.send('request success!');
+    console.log(req)
 }).listen(8081, "127.0.0.1");
 
 

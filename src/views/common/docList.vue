@@ -6,7 +6,9 @@
         <el-button :plain="true" @click="error">错误</el-button>
         <el-button :plain="true" @click="msg">普通</el-button>
         <el-button  type="" @click="send">发送请求</el-button>
+        <el-button  type="" @click="getDocList">名字列表</el-button>
         <p>{{ data }}</p>
+        <p>{{ this.GLOBAL.userSite }}</p>
     </div>
 </template>
 
@@ -17,6 +19,18 @@ import axios from 'axios'
           return{
               data: ''
           }
+      },
+      created(){
+        //   axios.get(this.GLOBAL.serverIP + 'test',{}).then(
+        //       res=>{
+        //         console.log(res);
+        //         this.data = res.data;
+        //       }
+        //   ).catch(
+        //       err=>{
+        //           console.log(err)
+        //       }
+        //   )
       },
     methods: {
         success(){
@@ -32,7 +46,7 @@ import axios from 'axios'
             this.common.message(this, '', '普通消息')
         },
         send(){
-        axios.get('http://127.0.0.1:8080/data',{}).then(
+        axios.get(this.GLOBAL.serverIp+'data',{}).then(
             res=>{
                 console.log(res);
                 this.data = res.data;
@@ -43,6 +57,18 @@ import axios from 'axios'
             }
         )
     },
+    getDocList(){
+        axios.get(this.GLOBAL.serverIp+'dataList',{}).then(
+            (res)=>{
+                console.log(res)
+                this.data = res
+            }
+        ).catch(
+            err=>{
+                console.log(err)
+            }
+        )
+    }
     }
   }
 </script>

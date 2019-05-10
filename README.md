@@ -324,3 +324,131 @@ Node.js配合node-http-proxy解决本地开发ajax跨域问题：https://www.cnb
 
 参考：https://marked.js.org/#/README.md#demo
 参考：https://blog.csdn.net/sdta25196/article/details/80325181
+
+## axios
+- axios get 请求参数使用 parmas
+get.vue:
+```
+
+```
+server.js
+```
+app.get('/dataList', (req, res)=>{
+    res.send(globalData);
+}).listen(8081, "127.0.0.1");
+```
+- axios post 请求使用 npm page is qs ，请求参数使用data
+post.vue
+```
+import $qs from 'qs'
+// 使用qs npm i qs --save  
+        addtext(){
+            axios.post('url',this.$qs.stringify({
+                data:{
+                    name: this.nameText,
+                    age: this.ageText,
+                    sex: this.sexText
+                }
+            })).then(res=>{
+                console.log(res)
+            }).catch(err=>{
+                console.log(err)
+            })
+        }
+```
+server.js:
+```
+var mongoose = require('mongoose');
+var express = require('express');
+var app = express();
+
+var bodyParser = require('body-parser')
+app.use(bodyParser.urlencoded({
+    extended: true
+}))
+//使用body-parser
+// testInput 表单提交接口
+app.post('/testInput', (req, res)=>{
+    res.send('request success!');
+    console.log(req.body)
+})
+```
+
+参考：https://www.jianshu.com/p/606802e40fd5
+
+文件上传使用formidable,具体方法：
+index.vue
+```
+           <form>
+                <input type="text" value="" v-model="name" placeholder="请输入用户名">
+                <input type="text" value="" v-model="age" placeholder="请输入年龄">
+                <input type="file" @change="getFile($event)">
+                <button @click="submitForm($event)">提交</button>
+            </form>
+
+             // post文件上传
+             data{
+               return{
+                 name: '',
+                 age: '',
+                 file:''
+               }
+             }
+        methods:{
+        getFile(event){
+            this.file = event.target.files[0];
+            console.log(this.file);
+        },
+        submitForm(event){
+             event.preventDefault();
+            let formData = new FormData();
+            formData.append('name', this.name);
+            formData.append('age', this.age);
+            formData.append('file', this.file);
+ 
+            let config = {
+              headers: {
+                'Content-Type': 'multipart/form-data'
+              }
+            }
+            axios.post('http://localhost:8081/testFormData', formData, config)
+            .then(res=>{
+                console.log(res)
+            }).catch(err=>{
+                console.log(err)
+            })
+        }
+        }
+```
+server.js
+```
+var mongoose = require('mongoose');
+var express = require('express');
+var app = express();
+let formidableMiddleware = require('express-formidable');
+
+app.use(formidableMiddleware({
+    encoding: 'utf-8',
+    uploadDir: './uploads',
+    multiples: true, // req.files to be arrays of files
+    keepExtensions: true//保留后缀
+  }))
+
+app.post('/testFormData', (req, res)=>{
+    res.send('request success!');
+    console.log(req.files.file.path);
+    console.log(req.fields);
+})
+```
+express-formidable:https://github.com/utatti/express-formidable
+
+## 配置文件中间件
+> config-lite 是一个轻量的读取配置文件的模块。
+config-lite 会根据环境变量（NODE_ENV）的不同从当前执行进程目录下的 config 目录加载不同的配置文件。
+如果不设置 NODE_ENV，则读取默认的 default 配置文件，
+如果设置了 NODE_ENV，则会合并指定的配置文件和 default 配置文件作为配置，
+config-lite 支持 .js、.json、.node、.yml、.yaml 后缀的文件。
+如果程序以 NODE_ENV=test node app 启动，则通过 require('config-lite') 会依次降级查找 config/test.js、config/test.json、config/test.node、config/test.yml、config/test.yaml 并合并 default 配置;
+如果程序以 NODE_ENV=production node app 启动，则通过 require('config-lite') 会依次降级查找 config/production.js、config/production.json、config/production.node、config/production.yml、config/production.yaml 并合并 default 配置。
+
+参考：https://github.com/nswbmw/N-blog/blob/master/book/4.3%20%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6.md
