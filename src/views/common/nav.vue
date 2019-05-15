@@ -1,108 +1,74 @@
 <template>
-   <div class="top clearfloat">
+   <div class="wrap">
    <el-row class="tac">
-      <!-- <el-col :span="20" class="float-right topNavMinWidth">
-        <el-menu
-        :default-active="$route.path"
-        class="el-menu-demo"
-        mode="horizontal"
-        @select="handleSelect"
-        background-color="#fff"
-        text-color="#409EFF"
-        router
-        active-text-color="#409EFF"
-        >
-        <span id="nav-title">
-            后台管理系统
-        </span>
-        <el-submenu index="">
-            <template slot="title">上午好！ {{ ses.userName }}</template>
-            <el-menu-item class="logout" @click="loginOut()">退出登录</el-menu-item>
-        </el-submenu>
-        </el-menu>
-        </el-col> -->
-        <el-col class="leftNavMinWidth">
-        <!--
-        <el-radio-group v-model="isCollapse">
-          <el-radio-button :label="false">展开</el-radio-button>
-          <el-radio-button :label="true">收起</el-radio-button>
-        </el-radio-group> 
-        -->
-          <el-menu
-            default-active="$route.path"
-            class="el-menu-vertical-demo"
-            @open="handleOpen"
-            @close="handleClose"
-            background-color="#545c64"
-            text-color="#fff"
-            active-text-color="#ffd04b"
-            :collapse="isCollapse"
-            router
-            >
-            <el-menu-item index="/home">
-              <i class="el-icon-menu"></i>
-              <span class="hidden-sm-and-down" slot="title">首页</span>
-            </el-menu-item>
-            <el-submenu index="1">
-              <template slot="title">
-                <i class="el-icon-document"></i>
-                <span class="hidden-sm-and-down">文档</span>
-              </template>
-              <el-menu-item-group>
-                <el-menu-item class="hidden-sm-and-down" index="/docList">文章列表</el-menu-item>
-                <el-menu-item class="hidden-sm-and-down" index="/addDoc">添加文章</el-menu-item>
-              </el-menu-item-group>
-            </el-submenu>
-            <el-submenu index="2">
-              <template slot="title">
-                <i class="el-icon-view"></i>
-                <span class="hidden-sm-and-down">图表</span>
-              </template>
-              <el-menu-item-group>
-                <el-menu-item class="hidden-sm-and-down" index="/lineChart">折线图</el-menu-item>
-                <el-menu-item class="hidden-sm-and-down" index="/mixChart">混合图</el-menu-item>
-              </el-menu-item-group>
-            </el-submenu>
-            <el-menu-item index="/option">
-              <i class="el-icon-setting"></i>
-              <span class="hidden-sm-and-down" slot="title">功能</span>
-            </el-menu-item>
-          </el-menu>
+           <el-col class="leftNavMinWidth">
+              <!-- <el-radio-group v-model="isCollapse" class="isCollapse">
+                <el-radio-button :label="false">展开</el-radio-button>
+                <el-radio-button :label="true">收起</el-radio-button>
+              </el-radio-group> -->
+              {{count}}
+              <el-menu
+                  default-active="$route.path"
+                  class="el-menu-vertical-demo"
+                  background-color="#304156"
+                  text-color="#fff"
+                  active-text-color="#ffd04b"
+                  :collapse="count"
+                  router
+              >
+                <el-menu-item index="/home">
+                  <i class="el-icon-menu"></i>
+                  <span slot="title" class="hidden-sm-and-down">首页</span>
+                </el-menu-item>
+                <el-menu-item index="/articleList">
+                  <i class="el-icon-document"></i>
+                  <span class="hidden-sm-and-down" slot="title">文档</span>
+                </el-menu-item>
+                <el-menu-item index="/lineChart">
+                  <i class="el-icon-view"></i>
+                  <span class="hidden-sm-and-down" slot="title">统计</span>
+                </el-menu-item>
+                <el-menu-item index="">
+                  <a href="https://github.com/AnsonZnl/Vue-Node-Cms" target="_blank" class="font-color-white">
+                      <i class="el-icon-link"></i>
+                      <span class="hidden-sm-and-down" slot="title">Github Link</span>
+                  </a>
+                </el-menu-item>
+              </el-menu>
         </el-col>
       </el-row>
     </div> 
 </template>
 
 <script>
-import 'element-ui/lib/theme-chalk/display.css';
+import 'element-ui/lib/theme-chalk/display.css'
+import store from '@/store'
 export default {
+  name: 'leftNav',
+  store,
     data() {
       return {
-        ses: window.sessionStorage,
-        isCollapse: false
+        msg:store.state.isCollapse,
+        isCollapse: store.state.isCollapse//导航栏伸缩
       };
+    },
+    computed:{
+        count(){
+            return store.state.isCollapse;
+        }
     },
     methods: {
       handleSelect(key, keyPath) {
         console.log(key, keyPath);
       },
-      handleOpen(key, keyPath) {
-        console.log(key, keyPath);
-      },
-      handleClose(key, keyPath) {
-        console.log(key, keyPath);
-      },
-      loginOut(){
-        // 注销后 清楚session信息 ，并返回登录页
-        this.ses.removeItem('data');
-        this.ses.removeItem('userName');
-        this.common.message(this, 'success', '退出成功！')
-        this.$router.push('/login');
-      }
     }
   }
 </script>
 <style scoped lang='scss'>
+  .el-menu-vertical-demo:not(.el-menu--collapse) {
+    width: 200px;
+    min-height: 400px;
+  }
 .el-menu--horizontal>.el-submenu {
     float: right;
 }
@@ -130,7 +96,10 @@ export default {
 }
 </style>
 <style lang="">
-  .logout{
+.wrap{
+  position: relative;
+}
+.logout{
     position: absolute;
     top: 0;
     right: 10px;
@@ -140,5 +109,14 @@ export default {
 .el-menu--popup{
     box-shadow: 0 0 0 0 rgba(0,0,0,0);
     background: #303133;
+}
+/* .isCollapse{
+  position:absolute;
+  top:0;
+  right: -139px;
+  z-index: 2;
+} */
+.font-color-white{
+  color: #fff;
 }
 </style>

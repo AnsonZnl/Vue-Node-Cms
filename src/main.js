@@ -18,6 +18,8 @@ import './assets/style.css'
 import common from './commonFunction/common.js'
 Vue.prototype.common = common
 
+import store from './store.js'
+
 import global_ from './views/GlobalConfig'//引用文件
 Vue.prototype.GLOBAL = global_//挂载到Vue实例上面
 
@@ -27,6 +29,7 @@ Vue.use(ElementUI);
 new Vue({
   el: '#app',
   router,
+  store,
   components: { App },
   template: '<App/>'
 })

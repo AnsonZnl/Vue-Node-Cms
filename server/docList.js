@@ -17,7 +17,7 @@ app.use(bodyParser.urlencoded({
 }))
 var globalData = null;
 
-mongoose.connect('/test');
+mongoose.connect('mongodb://39.106.203.127:27017/test');
 var db= mongoose.connection;
 //连接
 db.on('error', console.error.bind(console, 'connection error'));
@@ -60,6 +60,10 @@ app.all('*', function(req, res, next) {
        next();
 })
 // api 接口
+app.get('/data', (req, res)=>{
+    res.send(globalData);
+})
+
 app.get('/dataList', (req, res)=>{
     res.send(globalData);
 }).listen(8081, "127.0.0.1");

@@ -6,6 +6,7 @@ Dome： http://www.jsnav.top
 灵感来自于： 
 - [vue-admin-template](https://github.com/PanJiaChen/vue-admin-template)
 - [nswbmw/N-blog](https://github.com/nswbmw)
+- [vue-admin-template](https://github.com/PanJiaChen/vue-admin-template)
 ## Build Setup
 
 ``` bash
@@ -456,3 +457,95 @@ config-lite 支持 .js、.json、.node、.yml、.yaml 后缀的文件。
 如果程序以 NODE_ENV=production node app 启动，则通过 require('config-lite') 会依次降级查找 config/production.js、config/production.json、config/production.node、config/production.yml、config/production.yaml 并合并 default 配置。
 
 参考：https://github.com/nswbmw/N-blog/blob/master/book/4.3%20%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6.md
+
+### vuex 使用步骤
+scr下添加store.js 文件：
+```
+import Vue from 'vue'
+import Vuex from 'vuex'
+
+Vue.use(Vuex)
+
+export default new Vuex.Store({
+    state:{
+        isCollapse: false
+    },
+    mutations:{
+        StorsIsCollapseFn(){ 
+            this.state.isCollapse = !this.state.isCollapse
+        }
+    },
+    actions:{
+
+    }
+})
+
+```
+mian.js中引用并使用：
+```
+
+import store from './store.js'
+
+new Vue({
+  el: '#app',
+  router,
+  store,
+  components: { App },
+  template: '<App/>'
+})
+```
+about.vue:
+```
+<template>
+  <div class="about">
+    <h1>This is an about page</h1>
+    <p>{{msg}}</p>
+    <p>{{count}}</p>
+  </div>
+</template>
+<script>
+import store from '@/store'
+export default {
+  name: 'about',
+  store,
+  data () {
+    return {
+      msg: store.state.count
+    }
+  },
+  computed:{
+    //使用计算属性实时监听store中的变化并返回
+        count(){
+            return store.state.count;
+        }
+    }
+}
+</script>
+```
+
+info.vue:
+```
+<template>
+  <div>
+    hello info component
+    <button type="button" @click="add()">添加</button>
+  </div>
+</template>
+
+<script>
+import store from '@/store'
+export default {
+  name: 'Info',
+  store,
+  methods: {
+    add () {
+      console.log('add Event from info!')
+      store.commit('increase')
+    }
+  }
+}
+</script>
+
+<style scoped>
+</style>
+```
