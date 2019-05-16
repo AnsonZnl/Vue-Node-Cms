@@ -1,12 +1,10 @@
 <template>
 <div> 
   <el-row>
-    <el-col :xs="4" :sm='4' :md='4' :xl='4' class="nav">
-    <!-- <el-col class="nav"> -->
+    <el-col class="nav">
          <leftNav/>
     </el-col>
-    <el-col :xs="20" :sm='20' :md='20' :xl='20' class="content">
-    <!-- <el-col class="content"> -->
+    <el-col class="content">
         <div class="top-bar">
           <topBar/>
         </div>
@@ -37,6 +35,9 @@ export default {
 </script>
 
 <style scoped lang="scss">
+$navMinWidth: 58px;
+$navMaxWidth: 180px;
+
 a{
   text-decoration: none;
 }
@@ -45,16 +46,16 @@ a{
   padding: 10px;
 }
 .nav{
-  max-width: 180px;
+  max-width: $navMaxWidth;
   position: fixed;
   top: 0;
-  z-index: 2;
+  left: 0;
+  // z-index: 2;
 }
 .content{
-  // width: 100%;
-  margin-left: 200px;
+  margin-left: 180px;
+  width: -webkit-fill-available;
   .top-bar{
-      // position: fixed;
       top: 0;
       right: 0;
       height: 50px;
@@ -62,7 +63,6 @@ a{
       background: #edf2fc;
   }
   .content-fixed{
-      // position: absolute;
       right: 0;
       top:50px;
     }

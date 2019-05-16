@@ -43,12 +43,10 @@
         <el-button :plain="true" @click="error">错误</el-button>
         <el-button :plain="true" @click="msg">普通</el-button>
     </div>
-     <h2>Todolist</h2>   
-     <Todo/>
+     <h2>Todolist</h2>
   </div>
 </template>
 <script>
-import Todo from './todolist/todo.vue'
 import axios from 'axios'
 export default {
     data() {
@@ -62,7 +60,7 @@ export default {
       }
     },
     components:{
-      Todo
+      
     },
   created(){
       //读取常用商品列表
