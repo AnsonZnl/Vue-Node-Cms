@@ -100,8 +100,6 @@ export default {
   margin-left: 4px;
 }
 @media screen and (max-width: 990px) {
-  /* .wrap{
-    width: 64px;
-  } */
+
 }
 </style>

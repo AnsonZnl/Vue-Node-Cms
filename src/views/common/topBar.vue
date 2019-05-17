@@ -2,30 +2,21 @@
     <el-row class="clearfloat">
           <el-col class="tac clearfloat">
              <el-radio-group class="isCollapse">
-                 <i class="navIcon el-icon-arrow-right"></i>
-                 <i class="navIcon el-icon-arrow-left"></i>
-                <button @click="isCollapseFn()">isCollapse</button>
+                 <el-button @click="isCollapseFn()" type="" icon="el-icon-s-operation"></el-button>
               </el-radio-group>
-          <el-menu
-           class="el-menu-demo"
-           mode="vertical" 
-           background-color="#edf2fc"
-           @open="handleOpen"
-           @close="handleClose"
-           :class="{user:true,clearfloat: true}"
-           >
-            <el-submenu index="2" class="user" :show-timeout='show'>
-                <div slot="title" class="userIcon">
+            <div class="user">
+                <el-button @click="show = !show" class="userIcon">
                     <i class="el-icon-s-custom"></i>
+                </el-button>
+                <div style="margin-top: 20px; height: 20px;">
+                <el-collapse-transition>
+                    <div v-show="show">
+                    <div class="transition-box">{{ ses.userName }}</div>
+                    <div class="transition-box logout" @click="loginOut()">退出登录</div>
+                    </div>
+                </el-collapse-transition>
                 </div>
-                <div class="user-list">
-                    <el-menu-item-group>
-                        <el-menu-item index="2-1">{{ ses.userName }}</el-menu-item>  
-                        <el-menu-item index="2-2" class="logout" @click="loginOut()">退出登录</el-menu-item>
-                    </el-menu-item-group>
-                </div>
-            </el-submenu>
-          </el-menu>
+            </div>
         </el-col>
     </el-row>
 </template>
@@ -36,8 +27,9 @@ export default {
     store,
     data(){
         return{
-            show: 100,
-            ses: window.sessionStorage
+            show: false,
+            ses: window.sessionStorage,
+            topBarIsCollapseFn: store.state.isCollapse
         }
     },
     methods:{
@@ -49,6 +41,7 @@ export default {
         this.$router.push('/login');
       },
       isCollapseFn(){
+          this.$emit("titleChanged",this.topBarIsCollapseFn);//自定义事件  传递值“子向父组件传值”
           store.commit('StorsIsCollapseFn');
       },
       handleOpen(key, keyPath) {
@@ -62,30 +55,28 @@ export default {
 </script>
 <style scoped lang='scss'>
 .user{
-    position: absolute;
-    float: right;
-    width:80px;
-    top:0;
-    right: 0;
-    .user-list{
-        // position: absolute;
-        right: 0;
-        text-align: center;
-        width: 100px;
-        padding: 0;
-    }
-    .el-menu-item-group__title {
-        padding: 0!important;
-    }
-}
-.el-submenu .el-menu-item {
-    padding: 0!important;
-    width: 0;
-}
-.el-menu-item-group{
-    position: absolute;
-    right: 0;
+    position:absolute;
     top: 0;
+    right: 0;
+    .userIcon{
+        width:100px;
+        background: #edf2fc;
+    }
 }
 
+
+.transition-box {
+    width: 100px;
+    height: 40px;
+    background-color: #edf2fc;
+    text-align: center;
+    color: #000;
+    line-height: 40px;
+    text-align: center;
+    cursor: pointer;
+  }
+.transition-box:hover{
+    background-color:#b4bdce ;
+    color:#fff;
+}
 </style>
