@@ -1,15 +1,6 @@
 <template>
     <div id='app'>
-        <div class="test">
-            上传文件：<input type="file" @change="handlerUpload($event)"><br>
-            姓名：<input type="text" v-model="nameText"><br>
-            年龄：<input type="text" v-model="ageText"><br>
-            性别：  
-            <el-radio v-model="radio" label="1">男</el-radio>
-            <el-radio v-model="radio" label="0">女</el-radio><br>
-            <button @click="addtext">添加</button>
-        </div>
-        <hr>
+        <h2>post请求</h2>
         <div class="test">
            <form>
                 <input type="text" value="" v-model="name" placeholder="请输入用户名">
@@ -17,20 +8,22 @@
                 <input type="file" @change="getFile($event)">
                 <button @click="submitForm($event)">提交</button>
             </form>
-
         </div>
-        <!-- <el-row>
-        <el-col :span="12">
-            <div class="grid-content">
-                <textarea class="inuptText" v-model="input" placeholder="你想要写什么？"></textarea>
-            </div>
-        </el-col>
-        <el-col :span="12">
-            <div class="grid-content">
-                <div v-html="compiledMarkdown"></div>
-            </div>
-        </el-col>
-        </el-row> -->
+        
+        <h2>get请求</h2>
+        <el-form ref="form" :model="form" label-width="80px">
+            <el-form-item label="文章标题">
+                <el-input v-model="form.title"></el-input>
+            </el-form-item>
+            <el-form-item label="文章内容">
+                <el-input type="textarea" v-model="form.content"></el-input>
+            </el-form-item>
+            <el-form-item>
+                <el-button type="primary" @click="onSubmit">提交</el-button>
+                <el-button>取消</el-button>
+            </el-form-item>
+        </el-form>
+
     </div>
 </template>
 <style scoped lang="scss">
@@ -57,6 +50,10 @@ export default {
     name: 'App',
     data () {
         return {
+            form:{
+                title: 'title',
+                content: 'content'
+            },
             nameText: 'znl',
             ageText:'19',
             radio: '1',
@@ -67,18 +64,14 @@ export default {
         }
     },
     methods: {
-        // 文本form 上传
-        addtext(){
-            axios.post(this.GLOBAL.serverIP + 'testInput',this.$qs.stringify({
-                data:{
-                    name: this.nameText,
-                    age: this.ageText,
-                    sex: this.radio
-                }
-            }),{ 
-                headers: {
+        onSubmit(){
+            axios.get(this.GLOBAL.serverIp + 'addPost',{
+                params: this.form
+            },{
+                headers:{
                     'Content-Type': 'application/x-www-form-urlencoded'
-                }}).then(res=>{
+                }
+            }).then(res=>{
                 console.log(res)
             }).catch(err=>{
                 console.log(err)
@@ -95,13 +88,12 @@ export default {
             formData.append('name', this.name);
             formData.append('age', this.age);
             formData.append('file', this.file);
- 
             let config = {
               headers: {
                 'Content-Type': 'multipart/form-data'
               }
             }
-            axios.post(this.GLOBAL.serverIP + + 'testFormData', formData, config)
+            axios.post(this.GLOBAL.serverIp + 'testFormData', formData, config)
             .then(res=>{
                 console.log(res)
             }).catch(err=>{

@@ -21,22 +21,22 @@
       <el-row :gutter="10">
         <el-col :xs="12" :sm="12" :md="12" :lg="6" :xl="6">
           <div class="grid-content bg-purple">
-                1
+                社区官网
             </div>
         </el-col>
         <el-col :xs="12" :sm="12" :md="12" :lg="6" :xl="6">
           <div class="grid-content bg-purple">
-                2    
+                总文章数
             </div>
         </el-col>
         <el-col :xs="12" :sm="12" :md="12" :lg="6" :xl="6">
           <div class="grid-content bg-purple">
-                3   
+                访问量
             </div>
         </el-col>
         <el-col :xs="12" :sm="12" :md="12" :lg="6" :xl="6">
           <div class="grid-content bg-purple">
-                4
+                留言统计
             </div>
         </el-col>
       </el-row>

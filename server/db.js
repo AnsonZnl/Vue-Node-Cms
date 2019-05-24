@@ -1,51 +1,21 @@
-var mongoose = require('mongoose');
-var express = require('express');
-var app = express();
-var globalData = null;
 
-mongoose.connect('/test');
-var db= mongoose.connection;
-//连接
-db.on('error', console.error.bind(console, 'connection error'));
-db.once('open', function(){
-    console.log('ok')
-    // 建立schema （表 / 集合） 定义表的字段规则
-    var kittySchema = mongoose.Schema({
-        name: String,
-        sex: String,
-        age: Number
-    })
-    // 创建集合 model
-    var Kitten = mongoose.model('Kitten', kittySchema)
-    Kitten.find({name: '张宁乐'}, (err, data)=>{
-        if(!err){
-            console.log(data)
-            globalData =data
-        }else{
-            throw err;
-        }
-    })
-})
+const articleModel = require('./mongo').articleModel
 
-//设置跨域访问
-app.all('*', function(req, res, next) {
-       res.header("Access-Control-Allow-Origin", "*");
-       res.header("Access-Control-Allow-Headers", "X-Requested-With");
-       res.header("Access-Control-Allow-Methods","PUT,POST,GET,DELETE,OPTIONS");
-       res.header("X-Powered-By",' 3.2.1');
-       res.header("Content-Type", "application/json;charset=utf-8");
-       next();
-})
-
-// api 接口
-app.get('/data', (req, res)=>{
-    res.send(globalData);
-}).listen(8081, "127.0.0.1");
-// testInput 表单提交接口
-app.post('/testInput', (req, res)=>{
-    res.send('request success!');
-    console.log(req)
-}).listen(8081, "127.0.0.1");
-
-
-console.log('Server is running at http://127.0.0.1:8081/');
+articleModel.create({
+    id: '123',          
+    author_id: 'znl',   
+    class_id: '爱情', 
+    content: '我爱的人不爱我',    
+    title: '我是标题',        
+    tag: ['爱情','故事'],
+    create_date:  '2019-5-22 15:45:09',  
+    good: true,          
+    reading_number: 23, 
+    cover: ''           
+}, (err)=>{
+   if(!err){
+       console.log('插入成功！')
+   }else{
+       throw err;
+   }
+});

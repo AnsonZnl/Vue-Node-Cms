@@ -3,7 +3,7 @@ var express = require('express');
 var app = express();
 var globalData = null;
 
-mongoose.connect('/test');
+mongoose.connect('mongodb://localhost/test');
 var db= mongoose.connection;
 //连接
 db.on('error', console.error.bind(console, 'connection error'));

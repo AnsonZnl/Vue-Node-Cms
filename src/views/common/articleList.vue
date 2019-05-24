@@ -4,14 +4,36 @@
         <el-button type="primary">
             <router-link to="/addArticle">添加文章</router-link>
         </el-button>
-        <!-- <p>{{ data }}</p> -->
-        <div v-for="datalist in data" :key='datalist.id'> 
-            <span>{{datalist.age}}</span>
-            <span>{{datalist.name}}</span>
-            <span>{{datalist.age}}</span>
-            <span>{{datalist.remarks}}</span>
-         </div>
-        <p>{{ this.GLOBAL.userSite }}</p>
+          <el-table
+            :data="data"
+            border
+            style="width: 100%">
+            <el-table-column
+            prop="pv"
+            label="ID"
+            width="auto">
+            </el-table-column>
+            <el-table-column
+            prop="author"
+            label="用户名"
+            width="auto">
+            </el-table-column>
+            <el-table-column
+            prop="title"
+            label="标题"
+            width="auto">
+            </el-table-column>
+            <el-table-column
+                label="操作"
+                width="auto">
+                <template slot-scope="scope">
+                    <el-button @click="handleClick(scope.row)" type="text" size="small">查看</el-button>
+                    <el-button type="text" size="small">编辑</el-button>
+                </template>
+             </el-table-column>
+        </el-table>
+        
+
     </div>
 </template>
 
@@ -26,7 +48,7 @@ import axios from 'axios'
       created(){
         axios.get(this.GLOBAL.serverIp+'dataList',{}).then(
             (res)=>{
-                console.log(res)
+                console.log(res.data)
                 this.data = res.data
             }
         ).catch(
@@ -47,6 +69,10 @@ import axios from 'axios'
                 console.log(err)
             }
         )
+    },
+    handleClick(thisData){
+        this.$router.push({name: 'showArticle',params:{data: thisData}})
+        console.log(thisData)
     }
     }
   }

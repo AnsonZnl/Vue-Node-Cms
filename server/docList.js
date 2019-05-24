@@ -1,4 +1,3 @@
-
 var mongoose = require('mongoose');
 var express = require('express');
 var app = express();
@@ -11,13 +10,14 @@ app.use(formidableMiddleware({
     keepExtensions: true//保留后缀
   }))
 
-var bodyParser = require('body-parser')
-app.use(bodyParser.urlencoded({
-    extended: true
-}))
+// var bodyParser = require('body-parser')
+// app.use(bodyParser.urlencoded({
+//     extended: true
+// }))
+
 var globalData = null;
 
-mongoose.connect('mongodb://39.106.203.127:27017/test');
+mongoose.connect('mongodb://localhost/test');
 var db= mongoose.connection;
 //连接
 db.on('error', console.error.bind(console, 'connection error'));
@@ -31,10 +31,18 @@ db.once('open', function(){
         age: Number,
         remarks: String
     })
+    var postsSchema= new Schema({
+        _id: String,
+        author: String,
+        title: String,
+        content: String,
+        pv: Number
+    })
     // // 创建集合 model
-    var people = mongoose.model('person', peopleSchema)
+    // var people = mongoose.model('person', peopleSchema)
+    var people = mongoose.model('posts', postsSchema)
     //                            这个字段 巨坑
-    // 添加是写的表名，会自动转化成复数形式，查询时写表名不行，就得写表的复数，
+    // 添加是写的表名，会自动转化成复数形式，查询时写表名不行，就得写表的复.
     // people.create({name: 'as',sex: 'men', age: 13},(err, data)=>{
     //     if(!err) return err;
     //     console.log(data)
@@ -66,14 +74,21 @@ app.get('/data', (req, res)=>{
 
 app.get('/dataList', (req, res)=>{
     res.send(globalData);
-}).listen(8081, "127.0.0.1");
-
-// testInput 表单提交接口
-app.post('/testInput', (req, res)=>{
-    res.send('request success!');
-    console.log(req.body)
 })
 
+// 添加文章接口
+app.get('/addPost', (req, res)=>{
+    res.send(req + '');
+    console.log(req.query)
+})
+
+/*
+ * axios get 请求参数是： params
+ * axios post 请求参数是： data
+ * express get 接受参数 是 req.query
+ * express post 接受参数是：req.fields， 接受文件是：req.files.file.path
+ *
+ */
 // form-data
 app.post('/testFormData', (req, res)=>{
     res.send('request success!');
@@ -81,4 +96,5 @@ app.post('/testFormData', (req, res)=>{
     console.log(req.fields);
 })
 
+app.listen(8081, "127.0.0.1");
 console.log('Server is running at http://127.0.0.1:8081/');

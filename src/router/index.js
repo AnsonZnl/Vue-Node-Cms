@@ -6,6 +6,7 @@ import lineChart from '@/views/common/lineChart'
 import home from '@/views/common/home'
 import articleList from '@/views/common/articleList'
 import addArticle from '@/views/common/addArticle'
+import showArticle from '@/views/common/showArticle'
 import error from '@/views/error'
 
 Vue.use(Router)
@@ -33,6 +34,7 @@ const router = new Router({
         { path: '/articleList', name: 'articleList', component: articleList, meta:{ needLogin: true } },
         { path: '/addArticle', name: 'addArticle', component: addArticle, meta:{ needLogin: true } },
         { path: '/lineChart', name: 'lineChart', component: lineChart, meta:{ needLogin: true } },
+        { path: '/showArticle', name: 'showArticle', component: showArticle, meta:{ needLogin: true } }
       ]
     },
     {
