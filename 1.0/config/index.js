@@ -44,6 +44,8 @@ module.exports = {
     assetsRoot: path.resolve(__dirname, '../dist'),
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
+// 改为----> assetsPublicPath: './' 就在前面加一个点改为决对路径。 
+//然后执行 打包命令npm run build 打包成功后会有一个dist文件就可用了。
 
     /**
      * Source Maps
