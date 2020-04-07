@@ -1,7 +1,7 @@
 <template>
 <div class="container">
   <div class="main">
-    <h2>欢迎登录</h2> 
+    <h2>欢迎登录</h2>
     <br>
       <el-form :label-position="labelPosition" label-width="80px">
       <el-form-item label="账号">
@@ -90,15 +90,19 @@ import axios from 'axios'
   overflow-y:auto;
   background-color:#2d3a4b;
   .main{
-    width: 500px;
-    height: 500px;
-    margin:0 auto;
-    text-align: left;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    margin-left: -270px;
-    margin-top: -250px;
+    max-width:500px; 
+    padding:40px 40px 0 0;
+    margin-top: 50px;
+    margin: 0 auto;
+  //   width: 500px;
+  //   height: 500px;
+  //   margin:0 auto;
+  //   text-align: left;
+  //   position: fixed;
+  //   top: 50%;
+  //   left: 50%;
+  //   margin-left: -270px;
+  //   margin-top: -250px;
     h2{
       margin-left: 80px;
       text-align: center;
