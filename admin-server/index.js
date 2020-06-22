@@ -21,7 +21,6 @@ cors({
     exposeHeaders: ['WWW-Authenticate', 'Server-Authorization'] //设置获取其他自定义字段
 })
 
-
 app
     .use(user.routes())
     .use(table.routes())
